@@ -1,6 +1,6 @@
 name: Srivatsa_Step triggers
 
-on: workflow_dispatch
+on: push
 
 jobs:
     Srivatsa-step-job1:
