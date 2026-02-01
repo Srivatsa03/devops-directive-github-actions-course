@@ -1,15 +1,39 @@
-name: Srivatsa Demo Workflow
+name: Srivatsa_Step triggers
 
-on:
-    workflow_dispatch:
+on: workflow_dispatch
+
 jobs:
-    srivatsa-demo-job:
-        runs-on: ubuntu-latest
+    Srivatsa-step-job1:
+        runs-on: ubuntu-24.04
         steps:
-            - name: Srivatsa Demo step
+            - name: Srivatsa-step1
+              run: echo "Srivatsa_run1"
+    srivatsa-step-job2:
+        runs-on: ubuntu-24.04
+        steps:
+            - name: Srivatsa-step2
+              run: echo "Srivatsa_run2"
+              shell: python
+    srivatsa-step-job3:
+        runs-on: ubuntu-24.04
+        needs:
+            - Srivatsa-step-job1
+            - srivatsa-step-job2
+        steps:
+            - name: Srivatsa-step3
+              run: echo "Srivatsa_run3"
+    srivatsa-step-job4:
+        runs-on: python-latest
+        needs:
+            - srivatsa-step-job2
+            - srivatsa-step-job3
+        steps:
+            - name: srivatsa_run4
               run: |
-                echo "Hello from Srivatsa Demo!"
-                ls -la
-                whoami
-                echo " Hurray! This is Srivatsa's GitHub Actions demo workflow."
-                
+                  print("srivatsa_run4")
+                  
+                  
+                  
+
+              
+
