@@ -31,7 +31,7 @@ jobs:
             - name: srivatsa_run4
               run: |
                   print("srivatsa_run4")
-                  shell: python
+              shell: python
 
                   
                   
