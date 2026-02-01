@@ -23,7 +23,7 @@ jobs:
             - name: Srivatsa-step3
               run: echo "Srivatsa_run3"
     srivatsa-step-job4:
-        runs-on: python-latest
+        runs-on: ubuntu-latest
         needs:
             - srivatsa-step-job2
             - srivatsa-step-job3
