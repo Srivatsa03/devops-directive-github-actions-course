@@ -1,4 +1,4 @@
-name: srivatsa-demo-triggers
+name: Triggering Events
 on:
     push:
         branches:
@@ -9,14 +9,14 @@ on:
             - synchronize
             - reopened
         paths:
-            - "srivatsa-demo/filters/*md"
-            - "!srivatsa-demo/filters/.txt"
+            - "srivatsa-demo/filters/*.md"
+            - "!srivatsa-demo/filters/*.txt"
     workflow_dispatch:
-        jobs:
-            demo-job:
-                runs-on: ubuntu-latest
-                steps:
-                    - name: Srivatsa-Demo
-                      run: |
-                          echo "This is a demo workflow for Srivatsa"
-                          echo " Triggered by push or pull request events"
+jobs:
+    demo-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Srivatsa-Demo
+              run: |
+                  echo "This is a demo workflow for Srivatsa"
+                  echo " Triggered by push or pull request events"
