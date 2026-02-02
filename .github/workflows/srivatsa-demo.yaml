@@ -2,7 +2,7 @@ name: Triggering Events
 on:
     push:
         branches:
-            - "example-branch/*"
+            - "main"
     pull_request:
         types:
             - opened
