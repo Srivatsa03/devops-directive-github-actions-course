@@ -1,40 +1,22 @@
-name: Srivatsa_Step triggers
-
-on: push
-
-jobs:
-    Srivatsa-step-job1:
-        runs-on: ubuntu-24.04
-        steps:
-            - name: Srivatsa-step1
-              run: echo "Srivatsa_run1"
-    srivatsa-step-job2:
-        runs-on: ubuntu-24.04
-        steps:
-            - name: Srivatsa-step2
-              run:  print("Srivatsa_run2")
-              shell: python
-    srivatsa-step-job3:
-        runs-on: ubuntu-24.04
-        needs:
-            - Srivatsa-step-job1
-            - srivatsa-step-job2
-        steps:
-            - name: Srivatsa-step3
-              run: echo "Srivatsa_run3"
-    srivatsa-step-job4:
-        runs-on: ubuntu-latest
-        needs:
-            - srivatsa-step-job2
-            - srivatsa-step-job3
-        steps:
-            - name: srivatsa_run4
-              run: |
-                  print("srivatsa_run4")
-              shell: python
-
-                  
-                  
-
-              
-
+name: srivatsa-demo-triggers
+on:
+    push:
+        branches:
+            - "example-branch/*"
+    pull_request:
+        types:
+            - opened
+            - synchronize
+            - reopened
+        paths:
+            - "srivatsa-demo/filters/*md"
+            - "!srivatsa-demo/filters/.txt"
+    workflow_dispatch:
+        jobs:
+            demo-job:
+                runs-on: ubuntu-latest
+                steps:
+                    - name: Srivatsa-Demo
+                      run: |
+                          echo "This is a demo workflow for Srivatsa"
+                          echo " Triggered by push or pull request events"
