@@ -8,9 +8,9 @@ jobs:
         steps:
             - name: Job-01 usage
               run: |
-                echo" Job-01 direct usage"
+                echo "Job-01 direct usage"
     job-02:
-        runs-on: ubuntu -latest
+        runs-on: ubuntu-latest
         steps: 
             - name: normal usage of job-02
               run: |
@@ -33,7 +33,7 @@ jobs:
             - name: usage of job-03 and job-02 before job-04 run
               run: |
                 echo "Hurray! Job-04 ran, after usage of job-02 and job-03"
-                
+
 
 
 
