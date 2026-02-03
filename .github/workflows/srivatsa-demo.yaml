@@ -1,42 +1,28 @@
-name: using jobs in parallel
-
-on: 
+name: passing varibles between jobs
+on:
     workflow_dispatch
 jobs:
-    job-01:
+    producer:
         runs-on: ubuntu-latest
+        outputs: 
+            foo: ${{steps.generate-foo.outputs.foo}}
         steps:
-            - name: Job-01 usage
+            - name: generate a variable 
+              id: generate-foo
               run: |
-                echo "Job-01 direct usage"
-    job-02:
+                foo=bar
+
+                echo "foo: ${foo}" >> $GITHUB_OUTPUT
+                echo "FOO: ${foo}" >> $GITHUB_ENV
+            - name: inspect the value in producer 
+              run: |
+                echo "FOO: ${FOO}"
+                echo "foo: ${steps.generate-foo.outputs.foo}"
+    consumer:
         runs-on: ubuntu-latest
+        needs: producer
         steps: 
-            - name: normal usage of job-02
+            - name: checking the value from producer 
               run: |
-                echo "normal usage of job-02"
-    job-03:
-        runs-on: ubuntu-latest
-        needs: 
-            - job-01
-            - job-02
-        steps:
-            - name: usage of job-01 and job-02 before job-03 runs
-              run: |
-                echo "Hurray! JOB-03 Run using Job-01 and Job-02"
-    job-04:
-        runs-on: ubuntu-latest
-        needs:
-            - job-02
-            - job-03
-        steps:
-            - name: usage of job-03 and job-02 before job-04 run
-              run: |
-                echo "Hurray! Job-04 ran, after usage of job-02 and job-03"
-
-
-
-
-            
-
-    
+                echo "foo: ${needs.producer.outputs.foo}"
+                echo "FOO: ${foo:-<UNSET>}"
